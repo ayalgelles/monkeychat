@@ -16,7 +16,12 @@ Meteor.methods({
 		    data.appId = Accounts.loginServiceConfiguration.find().fetch()[0].appId
 		}
 	    }
-	    chat(data);
+	    try {
+		chat(data);
+	    }
+	    catch(x) {
+		console.log('exception when sending chat', x);
+	    }
 	}
     }
 });
