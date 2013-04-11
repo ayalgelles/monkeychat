@@ -68,9 +68,7 @@ if (Meteor.isClient) {
 
 
 if (Meteor.isServer) {
-    var require = __meteor_bootstrap__.require,
-    xmpp = require('node-xmpp');   
-  
+ 
     var argv = process.argv; 
     
     var channels = {};
@@ -152,7 +150,16 @@ if (Meteor.isServer) {
 				     { to: '-' + data.to + '@chat.facebook.com',                                                                                                   
 				       type: 'chat'}).                                                                                                                             
 		    c('body'). 
-		    t(data.msg));                                                                                                           
+		    t(data.msg));    
+    
+    typeof(closetime) !== 'undefined' && clearTimeout(closetime);
+      
+    closetime = setTimeout(function(){
+      console.log('closing connection');
+      cl.end();
+    },5000);
+    
+    
 	});
     };
     
